@@ -33,6 +33,4 @@ WORKDIR /opt/code
 
 ENV KEYSTORE_PASSWORD "override me"
 
-COPY ./gh-release.sh /usr/bin/gh-release.sh
-RUN chmod +x /usr/bin/gh-release.sh
 
