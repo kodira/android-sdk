@@ -31,6 +31,9 @@ RUN apt-get update && apt-get install -y jq
 RUN mkdir /opt/code
 WORKDIR /opt/code
 
-ENV KEYSTORE_PASSWORD "override me"
+# Expose gradle cache to speed up builds
+RUN mkdir /root/.gradle
+VOLUME /root/.gradle
 
+ENV KEYSTORE_PASSWORD "override me"
 
