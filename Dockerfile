@@ -3,10 +3,10 @@ FROM openjdk:8-stretch
 USER root
 WORKDIR /opt
 
-ENV SDK_URL "https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip"
+ENV SDK_URL "https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip"
 ENV ANDROID_HOME "/opt/android-sdk"
-ENV ANDROID_VERSION "28"
-ENV ANDROID_BUILD_TOOLS_VERSION "28.0.3"
+ENV ANDROID_VERSION "29"
+ENV ANDROID_BUILD_TOOLS_VERSION "29.0.2"
 
 RUN unset ANDROID_NDK_HOME
 
@@ -23,10 +23,11 @@ RUN touch /root/.android/repositories.cfg
 RUN $ANDROID_HOME/tools/bin/sdkmanager --update
 RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
     "platforms;android-${ANDROID_VERSION}" \
-    "platform-tools"
+    "platform-tools" \
+    "ndk-bundle"
 
-# Needed for gh-release.sh
-RUN apt-get update && apt-get install -y jq
+# Needed for gh-release.sh and native
+RUN apt-get update && apt-get install -y jq cmake
 
 RUN mkdir /opt/code
 WORKDIR /opt/code
