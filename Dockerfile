@@ -26,8 +26,8 @@ RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSIO
     "platform-tools" \
     "ndk-bundle"
 
-# Needed for gh-release.sh and native
-RUN apt-get update && apt-get install -y jq cmake
+# Needed NDK 
+RUN apt-get update && apt-get install -y cmake
 
 RUN mkdir /opt/code
 WORKDIR /opt/code
