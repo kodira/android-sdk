@@ -29,6 +29,9 @@ RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSIO
 # Needed NDK 
 RUN apt-get update && apt-get install -y cmake
 
+# Install tool to publish to github
+RUN wget -q "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" -O /usr/local/bin/github-release && chmod +x /usr/local/bin/github-release
+
 RUN mkdir /opt/code
 WORKDIR /opt/code
 
