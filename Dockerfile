@@ -3,11 +3,11 @@ FROM openjdk:8-stretch
 USER root
 WORKDIR /opt
 
-ENV ANDROID_TOOLS_URL "https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip"
+ENV ANDROID_TOOLS_URL "https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip"
 ENV ANDROID_HOME "/opt/android-sdk"
 ENV ANDROID_PLATFORM_VERSION "30"
-ENV ANDROID_BUILD_TOOLS_VERSION "29.0.3"
-ENV ANDROID_NDK_VERSION "21.0.6113669"
+ENV ANDROID_BUILD_TOOLS_VERSION "30.0.2"
+ENV ANDROID_NDK_VERSION "21.4.7075529"
 
 RUN unset ANDROID_NDK_HOME
 
@@ -17,12 +17,12 @@ RUN mkdir "$ANDROID_HOME" .android \
     && curl -s -o tools.zip $ANDROID_TOOLS_URL \
     && unzip tools.zip \
     && rm tools.zip \
-    && yes | $ANDROID_HOME/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses
+    && yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses
 
 # Install Android Build Tool and Libraries
 RUN touch /root/.android/repositories.cfg
-RUN $ANDROID_HOME/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --update
-RUN $ANDROID_HOME/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --install \
+RUN $ANDROID_HOME/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --update
+RUN $ANDROID_HOME/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --install \
     "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
     "platforms;android-${ANDROID_PLATFORM_VERSION}" \
     "platform-tools" \
