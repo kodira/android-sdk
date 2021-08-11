@@ -1,4 +1,4 @@
-FROM openjdk:8-stretch
+FROM openjdk:14-buster
 
 USER root
 WORKDIR /opt
