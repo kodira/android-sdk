@@ -1,11 +1,11 @@
-FROM openjdk:14-buster
+FROM openjdk:17-bullseye
 
 USER root
 WORKDIR /opt
 
 ENV ANDROID_TOOLS_URL "https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip"
 ENV ANDROID_HOME "/opt/android-sdk"
-ENV ANDROID_PLATFORM_VERSION "30"
+ENV ANDROID_PLATFORM_VERSION "31"
 ENV ANDROID_BUILD_TOOLS_VERSION "30.0.2"
 ENV ANDROID_NDK_VERSION "21.4.7075529"
 
