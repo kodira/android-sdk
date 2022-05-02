@@ -8,6 +8,7 @@ ENV ANDROID_HOME "/opt/android-sdk"
 ENV ANDROID_PLATFORM_VERSION "31"
 ENV ANDROID_BUILD_TOOLS_VERSION "30.0.2"
 ENV ANDROID_NDK_VERSION "21.4.7075529"
+ENV ANDROID_CMAKE_VERSION "3.18.1"
 
 RUN unset ANDROID_NDK_HOME
 
@@ -26,10 +27,8 @@ RUN $ANDROID_HOME/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --instal
     "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
     "platforms;android-${ANDROID_PLATFORM_VERSION}" \
     "platform-tools" \
-    "ndk;${ANDROID_NDK_VERSION}"
-
-# Needed for NDK 
-RUN apt-get update && apt-get install -y cmake
+    "ndk;${ANDROID_NDK_VERSION}" \
+    "cmake;${ANDROID_CMAKE_VERSION}"
 
 # Install tool to publish to github
 RUN wget -q "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" -O /usr/local/bin/github-release && chmod +x /usr/local/bin/github-release
