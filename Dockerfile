@@ -30,6 +30,9 @@ RUN $ANDROID_HOME/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --instal
     "ndk;${ANDROID_NDK_VERSION}" \
     "cmake;${ANDROID_CMAKE_VERSION}"
 
+# Sometimes needed for other scripts that do not know about cmake from Android SDK
+RUN apt-get update && apt-get install -y cmake
+
 # Install tool to publish to github
 RUN wget -q "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" -O /usr/local/bin/github-release && chmod +x /usr/local/bin/github-release
 
