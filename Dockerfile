@@ -9,6 +9,7 @@ ENV ANDROID_PLATFORM_VERSION "34"
 ENV ANDROID_BUILD_TOOLS_VERSION "33.0.2"
 ENV ANDROID_NDK_VERSION "21.4.7075529"
 ENV ANDROID_CMAKE_VERSION "3.18.1"
+ENV NODE_VERSION "20.11.0"
 
 RUN unset ANDROID_NDK_HOME
 
@@ -34,7 +35,13 @@ RUN $ANDROID_HOME/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --instal
 RUN apt-get update && apt-get install -y cmake
 
 # Install tool to publish to github
-RUN wget -q "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" -O /usr/local/bin/github-release && chmod +x /usr/local/bin/github-release
+RUN wget -q "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" -O /usr/local/bin/github-release \
+    && chmod +x /usr/local/bin/github-release
+
+# Install Node.js with  NVM
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash \
+    && . /root/.nvm/nvm.sh \
+    && nvm install ${NODE_VERSION}
 
 RUN mkdir /opt/code
 WORKDIR /opt/code
@@ -44,4 +51,3 @@ RUN mkdir /root/.gradle
 VOLUME /root/.gradle
 
 ENV KEYSTORE_PASSWORD "override me"
-
