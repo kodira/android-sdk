@@ -9,7 +9,6 @@ ENV ANDROID_PLATFORM_VERSION "34"
 ENV ANDROID_BUILD_TOOLS_VERSION "33.0.2"
 ENV ANDROID_NDK_VERSION "21.4.7075529"
 ENV ANDROID_CMAKE_VERSION "3.18.1"
-ENV NODE_VERSION "20.11.0"
 
 RUN unset ANDROID_NDK_HOME
 
@@ -31,17 +30,14 @@ RUN $ANDROID_HOME/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --instal
     "ndk;${ANDROID_NDK_VERSION}" \
     "cmake;${ANDROID_CMAKE_VERSION}"
 
-# Sometimes needed for other scripts that do not know about cmake from Android SDK
-RUN apt-get update && apt-get install -y cmake
+# Install cmake, gradle and NodeJS
+# cmake is sometimes needed for other scripts that do not know about cmake from Android SDK
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get update && apt-get install -y cmake gradle nodejs
 
 # Install tool to publish to github
 RUN wget -q "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" -O /usr/local/bin/github-release \
     && chmod +x /usr/local/bin/github-release
-
-# Install Node.js with  NVM
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash \
-    && . /root/.nvm/nvm.sh \
-    && nvm install ${NODE_VERSION}
 
 RUN mkdir /opt/code
 WORKDIR /opt/code
