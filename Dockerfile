@@ -1,4 +1,4 @@
-FROM openjdk:17-bullseye
+FROM openjdk:24-bullseye
 
 USER root
 WORKDIR /opt
