@@ -3,12 +3,12 @@ FROM openjdk:21-bullseye
 USER root
 WORKDIR /opt
 
-ENV ANDROID_TOOLS_URL "https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip"
-ENV ANDROID_HOME "/opt/android-sdk"
-ENV ANDROID_PLATFORM_VERSION "36"
-ENV ANDROID_BUILD_TOOLS_VERSION "36.0.0"
-ENV ANDROID_NDK_VERSION "28.2.13676358"
-ENV ANDROID_CMAKE_VERSION "4.0.2"
+ENV ANDROID_TOOLS_URL="https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip"
+ENV ANDROID_HOME="/opt/android-sdk"
+ENV ANDROID_PLATFORM_VERSION="36"
+ENV ANDROID_BUILD_TOOLS_VERSION="36.0.0"
+ENV ANDROID_NDK_VERSION="28.2.13676358"
+ENV ANDROID_CMAKE_VERSION="4.0.2"
 
 RUN unset ANDROID_NDK_HOME
 
@@ -46,4 +46,4 @@ WORKDIR /opt/code
 RUN mkdir /root/.gradle
 VOLUME /root/.gradle
 
-ENV KEYSTORE_PASSWORD "override me"
+ENV KEYSTORE_PASSWORD="override me"
