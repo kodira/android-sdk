@@ -47,3 +47,12 @@ RUN mkdir /root/.gradle
 VOLUME /root/.gradle
 
 ENV KEYSTORE_PASSWORD="override me"
+
+# Build arguments for versioning
+ARG IMAGE_TAG=dev
+ENV IMAGE_TAG=${IMAGE_TAG}
+
+# Add image labels for metadata
+LABEL org.opencontainers.image.title="Android SDK"
+LABEL org.opencontainers.image.description="Docker image to build Android apps"
+LABEL org.opencontainers.image.version="${IMAGE_TAG}"
