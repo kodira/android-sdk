@@ -1,9 +1,7 @@
 # android-sdk
 Docker image to build Android apps.
 
-Images are automatically built and published to GitHub Container Registry:
-- `latest` tag on master branch pushes
-- Tagged versions when tags are pushed
+Images are automatically built and published to GitHub Container Registry when a git tag is pushed.
 
 ## Usage
 
