@@ -11,6 +11,9 @@ ENV ANDROID_NDK_VERSION="28.2.13676358"
 ENV ANDROID_CMAKE_VERSION="3.18.1"
 ENV GRADLE_VERSION="8.13"
 
+# Install required utilities
+RUN apt-get update && apt-get install -y unzip curl wget && rm -rf /var/lib/apt/lists/*
+
 RUN unset ANDROID_NDK_HOME
 
 # Download Android SDK
