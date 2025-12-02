@@ -9,6 +9,7 @@ ENV ANDROID_PLATFORM_VERSION="36"
 ENV ANDROID_BUILD_TOOLS_VERSION="36.0.0"
 ENV ANDROID_NDK_VERSION="28.2.13676358"
 ENV ANDROID_CMAKE_VERSION="3.18.1"
+ENV GRADLE_VERSION="8.13"
 
 RUN unset ANDROID_NDK_HOME
 
@@ -30,10 +31,17 @@ RUN $ANDROID_HOME/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --instal
     "ndk;${ANDROID_NDK_VERSION}" \
     "cmake;${ANDROID_CMAKE_VERSION}"
 
-# Install cmake, gradle and NodeJS
+# Install Gradle (Java 21 requires Gradle 8.5+, Debian packages only have 4.4.1)
+RUN curl -s -L -o gradle.zip https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
+    && unzip gradle.zip \
+    && rm gradle.zip
+
+ENV PATH="/opt/gradle-${GRADLE_VERSION}/bin:${PATH}"
+
+# Install cmake and NodeJS
 # cmake is sometimes needed for other scripts that do not know about cmake from Android SDK
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get update && apt-get install -y cmake gradle nodejs
+RUN apt-get update && apt-get install -y cmake nodejs
 
 # Install tool to publish to github
 RUN wget -q "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" -O /usr/local/bin/github-release \
