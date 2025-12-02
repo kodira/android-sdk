@@ -44,7 +44,7 @@ ENV PATH="/opt/gradle-${GRADLE_VERSION}/bin:${PATH}"
 # Install cmake and NodeJS
 # cmake is sometimes needed for other scripts that do not know about cmake from Android SDK
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get update && apt-get install -y cmake nodejs
+RUN apt-get update && apt-get install -y cmake nodejs git
 
 # Install tool to publish to github
 RUN wget -q "https://github.com/buildkite/github-release/releases/download/v1.0/github-release-linux-amd64" -O /usr/local/bin/github-release \
