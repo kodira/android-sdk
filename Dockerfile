@@ -1,4 +1,4 @@
-FROM openjdk:21-bullseye
+FROM eclipse-temurin:21-jdk-jammy
 
 USER root
 WORKDIR /opt
